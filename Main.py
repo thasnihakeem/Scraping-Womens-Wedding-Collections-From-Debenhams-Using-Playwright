@@ -161,9 +161,6 @@ async def main():
         page = await browser.new_page()
         await perform_request_with_retry(page, 'https://www.debenhams.com/category/womens-wedding')
         product_urls = await get_product_urls(page)
-        df_1 = pd.DataFrame({'Product URL': product_urls})
-        df_1.to_csv('product_urls.csv', index=False)
-        print("Product URLs saved to product_urls.csv")
 
         data = []
         for i, url in enumerate(product_urls):
