@@ -103,12 +103,12 @@ async def get_MRP(page):
     try:
         MRP_elem = await page.query_selector(".text__StyledText-sc-14p9z0h-0.gKDxvK")
         MRP = await MRP_elem.text_content()
-        MRP = MRP.replace('£', '')
+        MRP = re.search(r'[\d.]+', MRP).group()
     except:
         try:
             MRP_elem = await page.query_selector('.text__StyledText-sc-14p9z0h-0.gtCFP')
             MRP = await MRP_elem.text_content()
-            MRP = MRP.replace('£', '')
+            MRP = re.search(r'[\d.]+', MRP).group()
         except:
             MRP = "Not Available"
     return MRP
@@ -117,7 +117,7 @@ async def get_sale_price(page):
     try:
         sale_price_element = await page.query_selector('.text__StyledText-sc-14p9z0h-0.gtCFP')
         sale_price = await sale_price_element.text_content()
-        sale_price = sale_price.replace('£', '')
+        sale_price =re.search(r'[\d.]+', sale_price).group()
     except:
         sale_price = "Not Available"
     return sale_price
